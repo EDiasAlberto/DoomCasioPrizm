@@ -26,6 +26,7 @@ static const char
 rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 
 #include <stdlib.h>
+#include "eventqueue.h"
 #include <unistd.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
@@ -192,13 +193,15 @@ static int	lastmousey = 0;
 boolean		mousemoved = false;
 boolean		shmFinished;
 
+static XEvent_Queue *ev_queue = Init_Event_Queue();
+
 void I_GetEvent(void)
 {
 
     event_t event;
 
     // put event-grabbing stuff in here
-    XNextEvent(X_display, &X_event);
+    XNextEvent(ev_queue);
     switch (X_event.type)
     {
       case KeyPress:
