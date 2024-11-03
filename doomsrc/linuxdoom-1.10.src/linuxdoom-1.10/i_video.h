@@ -54,7 +54,25 @@ void I_ReadScreen (byte* scr);
 void I_BeginRead (void);
 void I_EndRead (void);
 
+//Casio Prizm Keycode Maps
+#define CGKEY_LEFT 38
+#define CGKEY_DOWN 37
+#define CGKEY_UP 28
+#define CGKEY_RIGHT 27
 
+#define CGKEY_SHIFT 78
+#define CGKEY_OPTN 68
+#define CGKEY_VARS 58
+#define CGKEY_ALPHA 77
+#define CGKEY_X_SQR 67
+#define CGKEY_EXP 57
+
+#define CGKEY_F6 29
+#define CGKEY_F5 39
+#define CGKEY_F4 49
+#define CGKEY_F3 59
+#define CGKEY_F2 69
+#define CGKEY_F1 79
 
 #endif
 //-----------------------------------------------------------------------------

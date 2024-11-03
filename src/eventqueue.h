@@ -43,29 +43,7 @@
 // --------------------------
 
 typedef struct {
-    int data1; //stores value of what key was pressed/released
-} XKeyEvent;
-
-typedef struct {
-    int data1;
-} XButtonEvent;
-
-typedef union {
     int type;
-    XKeyEvent xkey;
-    XButtonEvent xbtn;
+    int data1;
 
 } XEvent;
-
-typedef struct {
-    int front;
-    int back;
-    XEvent events[MAXEVENTS];
-
-} XEvent_Queue;
-
-int XNextEvent(XEvent *event_return);
-
-int XPushEvent(XEvent *new_event);
-
-XEvent_Queue *Init_Event_Queue(void);

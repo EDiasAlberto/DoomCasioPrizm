@@ -36,6 +36,8 @@ rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 #include <X11/keysym.h>
 
 #include <X11/extensions/XShm.h>
+
+#include <fxcg/keyboard.h> //used to get key press inputs
 // Had to dig up XShm.c for this one.
 // It is in the libXext, but not in the XFree86 headers.
 #ifdef LINUX
@@ -92,10 +94,33 @@ int		doPointerWarp = POINTER_WARP_COUNTDOWN;
 static int	multiply=1;
 
 
+XEvent parseKeyPress(int key){
+	XEvent return_event; 
+	switch (key){
+		case CGKEY_LEFT: return_event.data1 = KEY_LEFTARROW;
+		case CGKEY_DOWN: return_event.data1 = KEY_DOWNARROW;
+		case CGKEY_UP: return_event.data1 = KEY_UPARROW;
+		case CGKEY_RIGHT: return_event.data1 = KEY_RIGHTARROW;
+
+		case CGKEY_SHIFT: return_event.data1 = 
+		case CGKEY_OPTN: return_event.data1 = 
+		case CGKEY_VARS: return_event.data1 = 
+		case CGKEY_ALPHA: return_event.data1 = 
+		case CGKEY_X_SQR: return_event.data1 = 
+		case CGKEY_EXP: return_event.data1 = 
+
+		case CGKEY_F6: return_event.data1 = 
+		case CGKEY_F5: return_event.data1 = 
+		case CGKEY_F4: return_event.data1 = 
+		case CGKEY_F3: return_event.data1 = 
+		case CGKEY_F2: return_event.data1 = 
+		case CGKEY_F1: return_event.data1 = 
+	}
+}
+
 //
 //  Translates the key currently in X_event
 //
-
 int xlatekey(void)
 {
 
@@ -201,7 +226,8 @@ void I_GetEvent(void)
     event_t event;
 
     // put event-grabbing stuff in here
-    XNextEvent(ev_queue);
+    int calckey = PRGM_GetKey();
+	X_event = parseKeyPress(calcKey);
     switch (X_event.type)
     {
       case KeyPress:
